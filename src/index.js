@@ -1,41 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactBook from './book1.jpg';
+
 import './index.css';
+
+
+const books = [
+  {
+  id:1,
+  img:  'https://images-na.ssl-images-amazon.com/images/I/81lsmyMcYNL._AC_UL160_SR160,160_.jpg',
+  title : 'Greenlights',
+  author : 'Matthew McConaughey'},
+  {
+  id:2,
+  img:  'https://images-na.ssl-images-amazon.com/images/I/81ej-GuREkL._AC_UL160_SR160,160_.jpg',
+  title : 'reenlights',
+  author : 'Matthew McConaughey',
+},
+];
 
 function BookList() {
   return (
     <section className='booklist'>
-      <Book/>
-      <Book/>
-      <Book/>
-      <Book/>
-      <Book/>
-      <Book/>
+      {books.map((book) => {
+        return <Book key={book.id} {...book}></Book>;
+      })}
     </section>
   );
 }
 
-const Book = () => {
+
+const Book = (props) => {
+  const {img, title, author} = props.book;
   return (
-    <article className="book">
-      <Image></Image>
-      <Title/>
-      <Author/>
+     <article className="book">
+     <img src={img} alt="Logo" />
+     <h1>{title}</h1>
+     <h4>{author}</h4>
     </article>
   );
-}
-
-function Image() {
-  // Import result is the URL of your image
-  return <img src={ReactBook} alt="Logo" />;
-}
-
-const Title = () => {
-  return <h1>Greenlights</h1>;
-};
-const Author = () => {
-  return <h4>Matthew McConaughey</h4>;
 };
 
 ReactDOM.render(<BookList/>, document.getElementById('root'));
